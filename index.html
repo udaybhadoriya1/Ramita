@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Ramita: being the marriage of Amrita and Ramendra. A book for their second anniversary.">
+<meta property="og:title" content="Ramita">
+<meta property="og:description" content="Being the marriage of Amrita and Ramendra, 17.11.2024">
+<meta property="og:image" content="img/16.jpg">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Ramita</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+<style>
+/* Layout: a real book on a reading table. Oxblood cloth cover with gilt lettering, marbled endpapers, white pages that turn.
+   Two-page spreads on wide screens (verse on the left, its photograph on the right); one page at a time on phones.
+   A single printed look in every theme, as a book would be. */
+:root {
+  --table: #2e2119;
+  --table-lit: #4a3426;
+  --paper: #fffdf8;
+  --paper-edge: #f1ebdf;
+  --ink: #241c15;
+  --faded: #75685a;
+  --oxblood: #7a2a22;
+  --cloth: #6b231c;
+  --gilt: #c9a35c;
+  --rule: #c7b799;
+  --serif: "EB Garamond", "Crimson Pro", Garamond, "Times New Roman", serif;
+  color-scheme: light;
+}
+html, body { height: 100%; }
+body {
+  margin: 0; color: var(--ink); font-family: var(--serif);
+  font-feature-settings: "onum" 1, "liga" 1, "kern" 1;
+  background: radial-gradient(90% 70% at 50% 40%, var(--table-lit), var(--table) 75%);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: hidden;
+}
+.stage { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding-block: 18px; box-sizing: border-box; }
+
+/* ---------- the book ---------- */
+.book { --pw: 360px; --ph: 504px; position: relative; width: calc(var(--pw) * 2); height: var(--ph); font-size: calc(var(--pw) / 25);
+  perspective: 3200px; transition: transform .9s cubic-bezier(.33,.08,.2,1); }
+.book.single { width: var(--pw); }
+.book.closed-front { transform: translateX(-25%); }
+.book.closed-back { transform: translateX(25%); }
+.book.single.closed-front, .book.single.closed-back { transform: none; }
+.book::after { content: ""; position: absolute; inset: auto 2% -18px; height: 30px; background: radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,.55), transparent 70%); filter: blur(6px); z-index: -1; }
+.leaf { position: absolute; top: 0; left: 50%; width: 50%; height: 100%; transform-style: preserve-3d; transform-origin: left center;
+  transition: transform 1s cubic-bezier(.33,.08,.2,1); will-change: transform; }
+.book.single .leaf { left: 0; width: 100%; }
+.leaf.turned { transform: rotateY(-180deg); }
+.leaf.gone { visibility: hidden; }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
+.face.back { transform: rotateY(180deg); }
+.leaf.moving .face::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,.12), transparent 40%); }
+
+/* ---------- pages ---------- */
+.pg { position: absolute; inset: 0; background: var(--paper); box-sizing: border-box; overflow: hidden; }
+.pg::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5  0 0 0 0 .42  0 0 0 0 .3  0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.pg.r::after, .pg.l::after { content: ""; position: absolute; top: 0; bottom: 0; width: 14%; pointer-events: none; }
+.pg.r::after { left: 0; background: linear-gradient(90deg, rgba(60,40,20,.2), rgba(60,40,20,.05) 35%, transparent); }
+.pg.l::after { right: 0; background: linear-gradient(270deg, rgba(60,40,20,.2), rgba(60,40,20,.05) 35%, transparent); }
+.book.single .pg::after { width: 5%; left: 0; right: auto; background: linear-gradient(90deg, rgba(60,40,20,.16), transparent); }
+.pg.r { box-shadow: inset -1px 0 0 var(--paper-edge), inset 0 -1px 0 var(--paper-edge), inset 0 1px 0 var(--paper-edge); }
+.pg.l { box-shadow: inset 1px 0 0 var(--paper-edge), inset 0 -1px 0 var(--paper-edge), inset 0 1px 0 var(--paper-edge); }
+.pg-in { position: absolute; inset: 0; padding: 3.3em 2.5em 3.1em; display: flex; flex-direction: column; box-sizing: border-box; z-index: 1; }
+.rhead { position: absolute; top: 1.35em; left: 0; right: 0; text-align: center; font-variant-caps: all-small-caps; letter-spacing: .14em; font-size: .78em; color: var(--faded); }
+.folio { position: absolute; bottom: 1.2em; left: 0; right: 0; text-align: center; font-size: .85em; color: var(--faded); }
+
+p { margin: 0; }
+.sc { font-variant-caps: all-small-caps; letter-spacing: .06em; }
+.aka { font-size: .72em; font-style: italic; color: var(--faded); white-space: nowrap; font-variant-caps: normal; letter-spacing: 0; }
+.fleuron { display: block; margin: 0 auto; width: 6.5em; height: 1em; color: var(--rule); flex: none; }
+.fleuron.gilt { color: var(--gilt); width: 8em; height: 1.3em; }
+.double { border: 0; border-top: 3px double var(--rule); margin: 0 auto; width: 55%; }
+
+/* cover */
+.pg.cover { background: var(--cloth); box-shadow: inset 0 0 0 1px rgba(0,0,0,.4), inset 0 0 3em rgba(0,0,0,.45); }
+.pg.cover::before { opacity: 1; mix-blend-mode: overlay;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 1px, transparent 1px 3px); }
+.pg.cover::after { display: none; }
+.cover-in { position: absolute; inset: 7%; border: 2px solid var(--gilt); outline: 1px solid var(--gilt); outline-offset: -8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.1em; text-align: center; color: var(--gilt); text-shadow: 0 1px 0 rgba(0,0,0,.5), 0 -1px 0 rgba(255,230,170,.25); z-index: 1; }
+.cv-top { font-variant-caps: all-small-caps; letter-spacing: .4em; font-size: 1.05em; margin-right: -.4em; }
+.cv-names { font-size: 3.6em; line-height: 1.05; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; display: grid; }
+.cv-amp { font-style: italic; text-transform: none; font-size: .6em; font-weight: 400; margin: .1em 0; }
+.cv-sub { font-style: italic; font-size: 1.05em; }
+.cv-foot { position: absolute; bottom: 1.6em; font-variant-caps: all-small-caps; letter-spacing: .3em; font-size: .9em; }
+.cover-in.back { gap: 0; }
+
+/* endpapers: marbled */
+.pg.endpaper { background:
+  radial-gradient(1.2em 0.7em at 30% 40%, rgba(201,163,92,.5), transparent 70%),
+  radial-gradient(1em 1.4em at 70% 70%, rgba(250,240,220,.35), transparent 70%),
+  radial-gradient(0.8em 0.8em at 80% 20%, rgba(30,40,70,.45), transparent 70%),
+  radial-gradient(1.4em 1em at 15% 85%, rgba(30,40,70,.4), transparent 70%),
+  #6b231c; background-size: 4.2em 3.6em, 5.1em 4.4em, 3.3em 3.9em, 4.6em 5em, auto; }
+.pg.endpaper::before { opacity: .6; }
+
+/* half-title, title, dedication */
+.half { margin: auto; text-align: center; font-variant-caps: all-small-caps; letter-spacing: .2em; font-size: 1em; color: var(--faded); line-height: 2; }
+.half span { display: block; font-size: 1.35em; color: var(--ink); letter-spacing: .12em; }
+.title { margin: auto; width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1em; border: 1px solid var(--rule); outline: 3px double var(--rule); outline-offset: .45em; padding: 2.2em 1em; box-sizing: border-box; }
+.title .the { font-variant-caps: all-small-caps; letter-spacing: .3em; color: var(--faded); }
+.title h1 { margin: 0; font-weight: 500; font-size: 2.25em; line-height: 1.05; letter-spacing: .04em; text-transform: uppercase; }
+.title h1 .of { display: block; font-size: .42em; font-style: italic; text-transform: none; letter-spacing: 0; color: var(--oxblood); margin: .35em 0; font-weight: 400; }
+.title h1 .aka { display: block; font-size: .3em; text-transform: none; margin-top: .15em; }
+.title h1.name { font-size: 3em; letter-spacing: .14em; margin-right: -.14em; }
+.title .being { font-style: italic; line-height: 1.5; }
+.title .who { display: block; font-style: normal; font-variant-caps: all-small-caps; letter-spacing: .12em; font-size: 1.15em; }
+.title .sub { font-style: italic; font-size: .98em; line-height: 1.4; }
+.title .imprint { font-variant-caps: all-small-caps; letter-spacing: .2em; font-size: .9em; line-height: 1.6; color: var(--faded); }
+.dedication { margin: auto; text-align: center; font-style: italic; font-size: 1.08em; line-height: 1.7; display: flex; flex-direction: column; gap: 1.4em; }
+.dedication .big { font-style: normal; font-size: 1.25em; letter-spacing: .12em; }
+.copyright { margin-top: auto; text-align: center; font-size: .78em; line-height: 1.5; color: var(--faded); font-style: italic; }
+
+/* verse pages */
+.vbox { margin: auto 0; display: flex; flex-direction: column; gap: 1.1em; }
+.vbox .lines { font-style: italic; font-size: 1.16em; line-height: 1.6; }
+.vbox .line { display: block; padding-left: 1.1em; text-indent: -1.1em; }
+.vbox .attr { font-size: .86em; color: var(--faded); line-height: 1.45; }
+.vbox .attr .sc { color: var(--ink); }
+.vbox .fleuron { margin: .6em 0 0; width: 4.5em; }
+.vbox.epi { text-align: center; }
+.vbox.epi .line { padding: 0; text-indent: 0; }
+
+/* plate pages */
+.plate-pg .pg-in { padding: 2.2em 2.2em; justify-content: center; align-items: center; }
+.mount { margin: 0; padding: .55em .55em .5em; background: #fbf7ee; border: 1px solid var(--rule); box-shadow: 0 .5em 1.2em -.7em rgba(60,40,15,.55); max-width: 100%; box-sizing: border-box; }
+.zoom { display: block; padding: 0; border: 0; background: none; cursor: zoom-in; outline: 1px solid rgba(60,40,15,.3); }
+.mount.land .zoom img { display: block; width: 100%; height: auto; }
+.mount.port .zoom img { display: block; height: 25em; width: auto; max-width: 100%; }
+.mount.land { width: 100%; }
+.mount figcaption { margin-top: .6em; text-align: center; font-size: .88em; line-height: 1.35; font-style: italic; color: var(--faded); }
+.plno { font-style: normal; font-variant-caps: all-small-caps; letter-spacing: .12em; color: var(--oxblood); }
+.zoom:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 2px; }
+
+/* chapter openers */
+.opener { margin: auto 0; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1em; }
+.chap { font-variant-caps: all-small-caps; letter-spacing: .3em; color: var(--oxblood); font-size: 1.05em; }
+.opener h2 { margin: 0; font-weight: 400; font-style: italic; font-size: 1.75em; line-height: 1.2; }
+.epigraph { margin-top: 1.4em; max-width: 17em; font-size: .9em; line-height: 1.5; color: var(--faded); }
+.epigraph q { font-style: italic; quotes: none; display: block; }
+.epigraph .attr { display: block; margin-top: .5em; }
+.epigraph .attr .sc { color: var(--ink); }
+.chead { text-align: center; display: flex; flex-direction: column; align-items: center; gap: .4em; margin: .8em 0 1.4em; }
+.chead h2 { margin: 0; font-weight: 400; font-style: italic; font-size: 1.4em; line-height: 1.2; }
+
+/* prose */
+.prose { display: flex; flex-direction: column; gap: 0; text-align: justify; hyphens: auto; -webkit-hyphens: auto; line-height: 1.5; }
+.prose p + p { text-indent: 1.5em; }
+.prose .noind { text-indent: 0; }
+.prose.drop > p:first-child::first-letter { float: left; font-size: 3.6em; line-height: .8; padding: .1em .12em 0 0; color: var(--oxblood); font-weight: 500; }
+.prose.drop > p:first-child::first-line { font-variant-caps: all-small-caps; letter-spacing: .05em; }
+.prose.solo { margin: auto 0 1.6em; font-size: 1.06em; }
+.sig { text-align: right; font-style: italic; text-indent: 0 !important; margin-top: 1em; }
+
+/* contents */
+.contents { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .75em; font-size: .98em; }
+.contents a { display: flex; align-items: baseline; gap: .45em; color: inherit; text-decoration: none; }
+.contents a:hover .t, .contents a:focus-visible .t { color: var(--oxblood); }
+.contents .n { flex: 0 0 2.1em; font-variant-caps: all-small-caps; letter-spacing: .08em; color: var(--oxblood); }
+.contents .t { font-style: italic; line-height: 1.3; }
+.contents .dots { flex: 1 1 auto; min-width: 1em; border-bottom: 1px dotted var(--rule); transform: translateY(-.3em); }
+.contents .pl { color: var(--faded); font-variant-numeric: oldstyle-nums; }
+
+/* letters */
+.letter { display: flex; flex-direction: column; gap: .8em; text-align: justify; hyphens: auto; -webkit-hyphens: auto; line-height: 1.48; font-size: .98em; margin-top: .4em; }
+.letter .salute { font-style: italic; text-align: left; }
+.letter .ps { font-style: italic; color: var(--faded); }
+.letter .from { text-align: right; font-style: italic; line-height: 1.45; }
+.letter .from .sc { font-style: normal; color: var(--oxblood); }
+
+/* finis */
+.finis { margin: auto 0; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.2em; }
+.finis .word { font-variant-caps: all-small-caps; letter-spacing: .6em; margin-right: -.6em; font-size: 1.5em; }
+.colophon { font-size: .9em; font-style: italic; color: var(--faded); line-height: 1.55; max-width: 16em; }
+
+/* ---------- controls ---------- */
+.controls { display: flex; align-items: center; gap: 14px; color: #e9dcc6; font-family: var(--serif); }
+.controls button { font: inherit; font-size: 1.05rem; color: #f3e8d4; background: rgba(255,255,255,.06); border: 1px solid rgba(233,220,198,.35); border-radius: 999px; padding: 8px 18px; cursor: pointer; }
+.controls button:hover:not(:disabled) { background: rgba(255,255,255,.12); }
+.controls button:disabled { opacity: .35; cursor: default; }
+.where { min-width: 9.5em; text-align: center; font-style: italic; font-size: 1rem; font-variant-numeric: lining-nums tabular-nums; }
+.hint { color: rgba(233,220,198,.6); font-style: italic; font-size: .92rem; text-align: center; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--gilt); outline-offset: 3px; }
+
+/* before the script binds the pages, show them simply, one after another */
+.pages:not(.bound) { display: grid; gap: 16px; justify-items: center; }
+.pages:not(.bound) .pg { position: relative; width: min(100%, 26rem); aspect-ratio: 5 / 7; font-size: 1rem; }
+
+/* lightbox */
+.lb { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(20, 14, 10, .9);
+  padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.lb[hidden] { display: none; }
+.lb figure { margin: 0; padding: .8rem .8rem .7rem; background: #fbf7ee; display: grid; gap: .6rem; max-width: min(92vw, 72rem); box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+.lb img { display: block; max-width: 100%; max-height: 78vh; width: auto; height: auto; margin: 0 auto; }
+.lb figcaption { text-align: center; font-style: italic; color: var(--faded); }
+.lb .x { position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); right: calc(14px + env(safe-area-inset-right, 0px)); background: rgba(255,255,255,.08); color: #f3e8d4; border: 1px solid rgba(233,220,198,.35); border-radius: 999px; width: 2.8rem; height: 2.8rem; font: 1.5rem/1 var(--serif); cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) { .leaf, .book { transition: none !important; } }
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="fl" viewBox="0 0 180 28">
+      <path d="M4 14 H62 M118 14 H176" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M90 4 C96 10 96 18 90 24 C84 18 84 10 90 4Z" fill="currentColor"/>
+      <path d="M90 14 C80 6 70 6 66 14 C70 22 80 22 90 14Z M90 14 C100 6 110 6 114 14 C110 22 100 22 90 14Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="58" cy="14" r="2" fill="currentColor"/><circle cx="122" cy="14" r="2" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="stage">
+  <div class="book closed-front" id="book" aria-label="Ramita: the marriage of Amrita and Ramendra, a book">
+    <div class="pages" id="pages">
+<section class="pg cover r" data-i="0" ><div class="pg-in"><div class="cover-in">
+  <div class="cv-names">Ramita</div>
+  <svg class="fleuron gilt" aria-hidden="true"><use href="#fl"/></svg>
+  <div class="cv-sub">being the Marriage of<br>Amrita &amp; Ramendra</div>
+  <div class="cv-foot">MMXXIV &middot; MMXXVI</div>
+</div></div></section>
+<section class="pg endpaper l" data-i="1" data-spread-only><div class="pg-in"></div></section>
+<section class="pg half-pg r" data-i="2" ><div class="pg-in"><div class="half"><span>Ramita</span></div></div></section>
+<section class="pg plate-pg l" data-i="3" ><div class="pg-in"><figure class="mount port" data-n="16"><button class="zoom" type="button" aria-label="Enlarge: A kiss upon the hand"><img src="img/16.jpg" width="1067" height="1600" alt="A kiss upon the hand" decoding="async"></button><figcaption><span class="plno">Frontispiece.</span><br>A kiss upon the hand</figcaption></figure></div></section>
+<section class="pg title-pg r" data-i="4" ><div class="pg-in"><div class="title">
+  <h1 class="name">Ramita</h1>
+  <svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg>
+  <p class="being">being the Marriage of<br><span class="who">Amrita <span class="aka">(Didi)</span></span>and<br><span class="who">Ramendra <span class="aka">(Jija ji)</span></span></p>
+  <p class="sub">A Chronicle in Six Chapters, being a Remembrance of the Seventeenth of November, 2024, upon the Occasion of the Second Anniversary</p>
+  <hr class="double">
+  <p class="imprint">Printed for the Family<br>November, 2026</p>
+</div></div></section>
+<section class="pg verse-pg l" data-i="5" ><div class="pg-in"><div class="vbox"><p class="lines"><span class="line">If I profane with my unworthiest hand</span><span class="line">This holy shrine, the gentle sin is this:</span><span class="line">My lips, two blushing pilgrims, ready stand</span><span class="line">To smooth that rough touch with a tender kiss.</span></p><p class="attr"><span class="sc">William Shakespeare</span><br><i>Romeo and Juliet</i></p></div>
+<p class="copyright">First edition, November 2026.<br>Printed for the family, and for no one else.<br>All rights of affection reserved.</p></div></section>
+<section class="pg ded-pg r" data-i="6" ><div class="pg-in"><div class="dedication"><p>To<br><span class="sc big">Amrita</span> <span class="aka">(Didi)</span><br>and<br><span class="sc big">Ramendra</span> <span class="aka">(Jija ji)</span></p>
+<p>on the second anniversary of their marriage<br>this volume is affectionately dedicated<br>by those who love them best.</p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div></div></section>
+<section class="pg verse-pg l" data-i="7" ><div class="pg-in"><div class="vbox epi"><p class="lines"><span class="line">My bounty is as boundless as the sea,</span><span class="line">My love as deep; the more I give to thee,</span><span class="line">The more I have, for both are infinite.</span></p>
+<p class="attr"><span class="sc">William Shakespeare</span><br><i>Romeo and Juliet</i></p></div></div></section>
+<section class="pg text-pg r" data-i="8" ><div class="pg-in"><div class="rhead">Preface</div><div class="chead"><span class="chap">Preface</span><h2>To the Reader, and to the Two of Them</h2></div>
+<div class="prose drop">
+<p>Two years ago, on the seventeenth of November, one house in our family grew a little quieter and another grew warm. We were told, as families are always told, that we were giving a daughter away. We have since found the arithmetic to be quite wrong. Nothing was given away. A son was added, and a sister came to be loved by one more heart.</p>
+<p>There is a love that arrives with music and marigolds, and there is a love that remains when the music has stopped. We saw the first upon the wedding night.</p>
+</div><div class="folio">8</div></div></section>
+<section class="pg text-pg l" data-i="9" ><div class="pg-in"><div class="rhead">Preface</div><div class="prose">
+<p class="noind">In the two years since, we have watched the second practised daily: in patience, in small and unremarked kindnesses, in the ordinary courage of choosing each other every morning.</p>
+<p>What follows is that night as we remember it, set down in six chapters. Facing each photograph we have placed a few lines from the poets who understood these matters better than we. The reader is begged to turn the pages slowly, for some joys are best taken in small sips.</p>
+<p class="sig">The Family.<br>November, 2026.</p>
+</div><div class="folio">9</div></div></section>
+<section class="pg text-pg r" data-i="10" ><div class="pg-in"><div class="rhead">Contents</div><div class="chead"><span class="chap">Contents</span></div><ol class="contents"><li><a href="#chapter-1" data-goto="chapter-1"><span class="n">I.</span><span class="t">In which the Evening begins</span><span class="dots"></span><span class="pl">11</span></a></li><li><a href="#chapter-2" data-goto="chapter-2"><span class="n">II.</span><span class="t">Of Garlands, and a Glance</span><span class="dots"></span><span class="pl">23</span></a></li><li><a href="#chapter-3" data-goto="chapter-3"><span class="n">III.</span><span class="t">In which the World is briefly forgotten</span><span class="dots"></span><span class="pl">37</span></a></li><li><a href="#chapter-4" data-goto="chapter-4"><span class="n">IV.</span><span class="t">Of the Sacred Fire, and Seven Promises</span><span class="dots"></span><span class="pl">51</span></a></li><li><a href="#chapter-5" data-goto="chapter-5"><span class="n">V.</span><span class="t">The Leave-taking</span><span class="dots"></span><span class="pl">63</span></a></li><li><a href="#chapter-6" data-goto="chapter-6"><span class="n">VI.</span><span class="t">A Month Hence</span><span class="dots"></span><span class="pl">67</span></a></li><li><a href="#letters" data-goto="letters"><span class="n"></span><span class="t">Letters from the Family</span><span class="dots"></span><span class="pl">79</span></a></li></ol><div class="folio">10</div></div></section>
+<section class="pg opener-pg l" data-i="11" id="chapter-1"><div class="pg-in"><div class="opener"><span class="chap">Chapter I.</span><h2>In which the Evening begins</h2><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div></div></section>
+<section class="pg text-pg r" data-i="12" ><div class="pg-in"><div class="rhead">In which the Evening begins</div><div class="prose drop solo"><p>It is a truth universally acknowledged, at least within our family, that no evening was ever quite so bright as this one. The marigolds hung like small suns, the sparklers wrote their light upon the air, and at the centre of all that brightness stood two people who did not yet know how much they would come to mean to each other.</p></div><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg><div class="folio">12</div></div></section>
+<section class="pg verse-pg l" data-i="13" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Because the birthday of my life</span><span class="line">Is come, my love is come to me.</span></p><p class="attr"><span class="sc">Christina Rossetti</span><br><i>A Birthday</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">13</div></div></section>
+<section class="pg plate-pg r" data-i="14" ><div class="pg-in"><figure class="mount land" data-n="5"><button class="zoom" type="button" aria-label="Enlarge: Beneath a canopy of marigolds, she waited"><img src="img/05.jpg" width="1600" height="1067" alt="Beneath a canopy of marigolds, she waited" decoding="async"></button><figcaption><span class="plno">Plate I.</span><br>Beneath a canopy of marigolds, she waited</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="15" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">O my Luve is like a red, red rose</span><span class="line">That’s newly sprung in June;</span><span class="line">O my Luve is like the melody</span><span class="line">That’s sweetly play’d in tune.</span></p><p class="attr"><span class="sc">Robert Burns</span><br><i>A Red, Red Rose</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">15</div></div></section>
+<section class="pg plate-pg r" data-i="16" ><div class="pg-in"><figure class="mount port" data-n="6"><button class="zoom" type="button" aria-label="Enlarge: Amrita (Didi), upon her wedding night"><img src="img/06.jpg" width="1067" height="1600" alt="Amrita (Didi), upon her wedding night" decoding="async"></button><figcaption><span class="plno">Plate II.</span><br>Amrita <span class="aka">(Didi)</span>, upon her wedding night</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="17" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">For thy sweet love remember’d such wealth brings</span><span class="line">That then I scorn to change my state with kings.</span></p><p class="attr"><span class="sc">William Shakespeare</span><br><i>Sonnet XXIX</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">17</div></div></section>
+<section class="pg plate-pg r" data-i="18" ><div class="pg-in"><figure class="mount port" data-n="7"><button class="zoom" type="button" aria-label="Enlarge: Ramendra (Jija ji), whose smile gave him away"><img src="img/07.jpg" width="1067" height="1600" alt="Ramendra (Jija ji), whose smile gave him away" decoding="async"></button><figcaption><span class="plno">Plate III.</span><br>Ramendra <span class="aka">(Jija ji)</span>, whose smile gave him away</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="19" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">She walks in beauty, like the night</span><span class="line">Of cloudless climes and starry skies;</span><span class="line">And all that’s best of dark and bright</span><span class="line">Meet in her aspect and her eyes.</span></p><p class="attr"><span class="sc">Lord Byron</span><br><i>She Walks in Beauty</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">19</div></div></section>
+<section class="pg plate-pg r" data-i="20" ><div class="pg-in"><figure class="mount land" data-n="1"><button class="zoom" type="button" aria-label="Enlarge: The procession, in a shower of sparks"><img src="img/01.jpg" width="1600" height="1067" alt="The procession, in a shower of sparks" decoding="async"></button><figcaption><span class="plno">Plate IV.</span><br>The procession, in a shower of sparks</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="21" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">A thing of beauty is a joy for ever:</span><span class="line">Its loveliness increases; it will never</span><span class="line">Pass into nothingness.</span></p><p class="attr"><span class="sc">John Keats</span><br><i>Endymion</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">21</div></div></section>
+<section class="pg plate-pg r" data-i="22" ><div class="pg-in"><figure class="mount land" data-n="8"><button class="zoom" type="button" aria-label="Enlarge: The arrival, seen from afar"><img src="img/08.jpg" width="1600" height="1067" alt="The arrival, seen from afar" decoding="async"></button><figcaption><span class="plno">Plate V.</span><br>The arrival, seen from afar</figcaption></figure></div></section>
+<section class="pg opener-pg l" data-i="23" id="chapter-2"><div class="pg-in"><div class="opener"><span class="chap">Chapter II.</span><h2>Of Garlands, and a Glance</h2><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg><p class="epigraph"><q>There could have been no two hearts so open, no tastes so similar, no feelings so in unison.</q><span class="attr"><span class="sc">Jane Austen</span>, <i>Persuasion</i></span></p></div></div></section>
+<section class="pg text-pg r" data-i="24" ><div class="pg-in"><div class="rhead">Of Garlands, and a Glance</div><div class="prose drop solo"><p>A garland is a small thing: a little thread, a few flowers, sure to wilt by morning. Yet when it passes from one pair of hands to another, it carries a promise heavier than gold. The company cheered until it was hoarse. The two of them, we suspect, heard nothing at all.</p></div><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg><div class="folio">24</div></div></section>
+<section class="pg verse-pg l" data-i="25" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Come live with me and be my love,</span><span class="line">And we will all the pleasures prove.</span></p><p class="attr"><span class="sc">Christopher Marlowe</span><br><i>The Passionate Shepherd to His Love</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">25</div></div></section>
+<section class="pg plate-pg r" data-i="26" ><div class="pg-in"><figure class="mount land" data-n="3"><button class="zoom" type="button" aria-label="Enlarge: Enthroned, for one evening and ever after"><img src="img/03.jpg" width="1600" height="1067" alt="Enthroned, for one evening and ever after" decoding="async"></button><figcaption><span class="plno">Plate VI.</span><br>Enthroned, for one evening and ever after</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="27" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">When our two souls stand up erect and strong,</span><span class="line">Face to face, silent, drawing nigh and nigher.</span></p><p class="attr"><span class="sc">Elizabeth Barrett Browning</span><br><i>Sonnets from the Portuguese, XXII</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">27</div></div></section>
+<section class="pg plate-pg r" data-i="28" ><div class="pg-in"><figure class="mount land" data-n="9"><button class="zoom" type="button" aria-label="Enlarge: Side by side, as they would remain"><img src="img/09.jpg" width="1600" height="1067" alt="Side by side, as they would remain" decoding="async"></button><figcaption><span class="plno">Plate VII.</span><br>Side by side, as they would remain</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="29" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Thou art my life, my love, my heart,</span><span class="line">The very eyes of me,</span><span class="line">And hast command of every part,</span><span class="line">To live and die for thee.</span></p><p class="attr"><span class="sc">Robert Herrick</span><br><i>To Anthea, Who May Command Him Anything</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">29</div></div></section>
+<section class="pg plate-pg r" data-i="30" ><div class="pg-in"><figure class="mount land" data-n="10"><button class="zoom" type="button" aria-label="Enlarge: The first of many hands held"><img src="img/10.jpg" width="1600" height="1067" alt="The first of many hands held" decoding="async"></button><figcaption><span class="plno">Plate VIII.</span><br>The first of many hands held</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="31" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">All thoughts, all passions, all delights,</span><span class="line">Whatever stirs this mortal frame,</span><span class="line">All are but ministers of Love,</span><span class="line">And feed his sacred flame.</span></p><p class="attr"><span class="sc">Samuel Taylor Coleridge</span><br><i>Love</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">31</div></div></section>
+<section class="pg plate-pg r" data-i="32" ><div class="pg-in"><figure class="mount land" data-n="2"><button class="zoom" type="button" aria-label="Enlarge: The garlands exchanged, beneath falling colour"><img src="img/02.jpg" width="1600" height="1067" alt="The garlands exchanged, beneath falling colour" decoding="async"></button><figcaption><span class="plno">Plate IX.</span><br>The garlands exchanged, beneath falling colour</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="33" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Bliss was it in that dawn to be alive,</span><span class="line">But to be young was very heaven!</span></p><p class="attr"><span class="sc">William Wordsworth</span><br><i>The Prelude</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">33</div></div></section>
+<section class="pg plate-pg r" data-i="34" ><div class="pg-in"><figure class="mount land" data-n="11"><button class="zoom" type="button" aria-label="Enlarge: A hundred voices cheering"><img src="img/11.jpg" width="1600" height="1067" alt="A hundred voices cheering" decoding="async"></button><figcaption><span class="plno">Plate X.</span><br>A hundred voices cheering</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="35" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Where both deliberate, the love is slight:</span><span class="line">Who ever loved, that loved not at first sight?</span></p><p class="attr"><span class="sc">Christopher Marlowe</span><br><i>Hero and Leander</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">35</div></div></section>
+<section class="pg plate-pg r" data-i="36" ><div class="pg-in"><figure class="mount land" data-n="12"><button class="zoom" type="button" aria-label="Enlarge: A look that said what no vow could"><img src="img/12.jpg" width="1600" height="1067" alt="A look that said what no vow could" decoding="async"></button><figcaption><span class="plno">Plate XI.</span><br>A look that said what no vow could</figcaption></figure></div></section>
+<section class="pg opener-pg l" data-i="37" id="chapter-3"><div class="pg-in"><div class="opener"><span class="chap">Chapter III.</span><h2>In which the World is briefly forgotten</h2><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg><p class="epigraph"><q>I cannot fix on the hour, or the spot, or the look, or the words, which laid the foundation. It is too long ago. I was in the middle before I knew that I had begun.</q><span class="attr"><span class="sc">Jane Austen</span>, <i>Pride and Prejudice</i></span></p></div></div></section>
+<section class="pg text-pg r" data-i="38" ><div class="pg-in"><div class="rhead">In which the World is briefly forgotten</div><div class="prose drop solo"><p>Every story worth the telling keeps a few pages that belong to no one but its heroes. Here, a little way from the music, the whole wide world contracted to the width of a glance, and for some minutes there was nothing in it but the two of them.</p></div><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg><div class="folio">38</div></div></section>
+<section class="pg verse-pg l" data-i="39" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Bright star, would I were stedfast as thou art—</span><span class="line">Not in lone splendour hung aloft the night.</span></p><p class="attr"><span class="sc">John Keats</span><br><i>Bright Star</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">39</div></div></section>
+<section class="pg plate-pg r" data-i="40" ><div class="pg-in"><figure class="mount port" data-n="13"><button class="zoom" type="button" aria-label="Enlarge: Under a sky of borrowed stars"><img src="img/13.jpg" width="1067" height="1600" alt="Under a sky of borrowed stars" decoding="async"></button><figcaption><span class="plno">Plate XII.</span><br>Under a sky of borrowed stars</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="41" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">How do I love thee? Let me count the ways.</span><span class="line">I love thee to the depth and breadth and height</span><span class="line">My soul can reach.</span></p><p class="attr"><span class="sc">Elizabeth Barrett Browning</span><br><i>Sonnets from the Portuguese, XLIII</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">41</div></div></section>
+<section class="pg plate-pg r" data-i="42" ><div class="pg-in"><figure class="mount port" data-n="15"><button class="zoom" type="button" aria-label="Enlarge: Her joy, and his quiet pride"><img src="img/15.jpg" width="1067" height="1600" alt="Her joy, and his quiet pride" decoding="async"></button><figcaption><span class="plno">Plate XIII.</span><br>Her joy, and his quiet pride</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="43" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Shall I compare thee to a summer’s day?</span><span class="line">Thou art more lovely and more temperate.</span></p><p class="attr"><span class="sc">William Shakespeare</span><br><i>Sonnet XVIII</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">43</div></div></section>
+<section class="pg plate-pg r" data-i="44" ><div class="pg-in"><figure class="mount land" data-n="17"><button class="zoom" type="button" aria-label="Enlarge: Laughter, the surest sign of a happy marriage"><img src="img/17.jpg" width="1600" height="1067" alt="Laughter, the surest sign of a happy marriage" decoding="async"></button><figcaption><span class="plno">Plate XIV.</span><br>Laughter, the surest sign of a happy marriage</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="45" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">For love, all love of other sights controls,</span><span class="line">And makes one little room an everywhere.</span></p><p class="attr"><span class="sc">John Donne</span><br><i>The Good-Morrow</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">45</div></div></section>
+<section class="pg plate-pg r" data-i="46" ><div class="pg-in"><figure class="mount land" data-n="18"><button class="zoom" type="button" aria-label="Enlarge: An embrace, and a home within it"><img src="img/18.jpg" width="1600" height="1067" alt="An embrace, and a home within it" decoding="async"></button><figcaption><span class="plno">Plate XV.</span><br>An embrace, and a home within it</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="47" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Drink to me only with thine eyes,</span><span class="line">And I will pledge with mine;</span><span class="line">Or leave a kiss but in the cup,</span><span class="line">And I’ll not look for wine.</span></p><p class="attr"><span class="sc">Ben Jonson</span><br><i>Song: To Celia</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">47</div></div></section>
+<section class="pg plate-pg r" data-i="48" ><div class="pg-in"><figure class="mount port" data-n="19"><button class="zoom" type="button" aria-label="Enlarge: Forehead to forehead, and the world grew small"><img src="img/19.jpg" width="1067" height="1600" alt="Forehead to forehead, and the world grew small" decoding="async"></button><figcaption><span class="plno">Plate XVI.</span><br>Forehead to forehead, and the world grew small</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="49" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">But I, being poor, have only my dreams;</span><span class="line">I have spread my dreams under your feet;</span><span class="line">Tread softly because you tread on my dreams.</span></p><p class="attr"><span class="sc">W. B. Yeats</span><br><i>He Wishes for the Cloths of Heaven</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">49</div></div></section>
+<section class="pg plate-pg r" data-i="50" ><div class="pg-in"><figure class="mount land" data-n="20"><button class="zoom" type="button" aria-label="Enlarge: Some moments need no colour"><img src="img/20.jpg" width="1600" height="1067" alt="Some moments need no colour" decoding="async"></button><figcaption><span class="plno">Plate XVII.</span><br>Some moments need no colour</figcaption></figure></div></section>
+<section class="pg opener-pg l" data-i="51" id="chapter-4"><div class="pg-in"><div class="opener"><span class="chap">Chapter IV.</span><h2>Of the Sacred Fire, and Seven Promises</h2><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div></div></section>
+<section class="pg text-pg r" data-i="52" ><div class="pg-in"><div class="rhead">Of the Sacred Fire, and Seven Promises</div><div class="prose drop solo"><p>Seven rounds of the sacred fire, and seven promises: to walk together, to grow together, to remain friends when the years grow heavy. The flame has long since gone out. The promises, we are glad to report, are burning still.</p></div><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg><div class="folio">52</div></div></section>
+<section class="pg verse-pg l" data-i="53" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Thou hast made me endless, such is thy pleasure.</span><span class="line">This frail vessel thou emptiest again and again,</span><span class="line">and fillest it ever with fresh life.</span></p><p class="attr"><span class="sc">Rabindranath Tagore</span><br><i>Gitanjali</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">53</div></div></section>
+<section class="pg plate-pg r" data-i="54" ><div class="pg-in"><figure class="mount land" data-n="21"><button class="zoom" type="button" aria-label="Enlarge: At the threshold of the sacred fire"><img src="img/21.jpg" width="1600" height="1067" alt="At the threshold of the sacred fire" decoding="async"></button><figcaption><span class="plno">Plate XVIII.</span><br>At the threshold of the sacred fire</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="55" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">To see a World in a Grain of Sand</span><span class="line">And a Heaven in a Wild Flower,</span><span class="line">Hold Infinity in the palm of your hand</span><span class="line">And Eternity in an hour.</span></p><p class="attr"><span class="sc">William Blake</span><br><i>Auguries of Innocence</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">55</div></div></section>
+<section class="pg plate-pg r" data-i="56" ><div class="pg-in"><figure class="mount land" data-n="4"><button class="zoom" type="button" aria-label="Enlarge: Rice in hennaed palms, an offering for plenty"><img src="img/04.jpg" width="1600" height="1067" alt="Rice in hennaed palms, an offering for plenty" decoding="async"></button><figcaption><span class="plno">Plate XIX.</span><br>Rice in hennaed palms, an offering for plenty</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="57" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Let me not to the marriage of true minds</span><span class="line">Admit impediments. Love is not love</span><span class="line">Which alters when it alteration finds.</span></p><p class="attr"><span class="sc">William Shakespeare</span><br><i>Sonnet CXVI</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">57</div></div></section>
+<section class="pg plate-pg r" data-i="58" ><div class="pg-in"><figure class="mount land" data-n="22"><button class="zoom" type="button" aria-label="Enlarge: Hand over hand, the old words spoken"><img src="img/22.jpg" width="1600" height="1067" alt="Hand over hand, the old words spoken" decoding="async"></button><figcaption><span class="plno">Plate XX.</span><br>Hand over hand, the old words spoken</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="59" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">My true love hath my heart, and I have his,</span><span class="line">By just exchange one for the other given.</span></p><p class="attr"><span class="sc">Sir Philip Sidney</span><br><i>The Bargain</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">59</div></div></section>
+<section class="pg plate-pg r" data-i="60" ><div class="pg-in"><figure class="mount port" data-n="23"><button class="zoom" type="button" aria-label="Enlarge: The sindoor"><img src="img/23.jpg" width="1067" height="1600" alt="The sindoor" decoding="async"></button><figcaption><span class="plno">Plate XXI.</span><br>The sindoor</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="61" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">If ever two were one, then surely we.</span><span class="line">If ever man were loved by wife, then thee.</span></p><p class="attr"><span class="sc">Anne Bradstreet</span><br><i>To My Dear and Loving Husband</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">61</div></div></section>
+<section class="pg plate-pg r" data-i="62" ><div class="pg-in"><figure class="mount land" data-n="24"><button class="zoom" type="button" aria-label="Enlarge: Husband and wife"><img src="img/24.jpg" width="1600" height="1067" alt="Husband and wife" decoding="async"></button><figcaption><span class="plno">Plate XXII.</span><br>Husband and wife</figcaption></figure></div></section>
+<section class="pg opener-pg l" data-i="63" id="chapter-5"><div class="pg-in"><div class="opener"><span class="chap">Chapter V.</span><h2>The Leave-taking</h2><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg><p class="epigraph"><q>Journeys end in lovers meeting,<br>Every wise man’s son doth know.</q><span class="attr"><span class="sc">William Shakespeare</span>, <i>Twelfth Night</i></span></p></div></div></section>
+<section class="pg text-pg r" data-i="64" ><div class="pg-in"><div class="rhead">The Leave-taking</div><div class="prose drop solo"><p>Of all the hours of that long night, this was the one that undid us. A daughter left the house in which she had grown, and every one of us wept as though something were ending. We were mistaken. Two years on, we understand that she did not leave one home. She came to belong to two.</p></div><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg><div class="folio">64</div></div></section>
+<section class="pg verse-pg l" data-i="65" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">You are the bows from which your children</span><span class="line">as living arrows are sent forth.</span></p><p class="attr"><span class="sc">Kahlil Gibran</span><br><i>The Prophet</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">65</div></div></section>
+<section class="pg plate-pg r" data-i="66" ><div class="pg-in"><figure class="mount land" data-n="25"><button class="zoom" type="button" aria-label="Enlarge: The leave-taking"><img src="img/25.jpg" width="1600" height="1067" alt="The leave-taking" decoding="async"></button><figcaption><span class="plno">Plate XXIII.</span><br>The leave-taking</figcaption></figure></div></section>
+<section class="pg opener-pg l" data-i="67" id="chapter-6"><div class="pg-in"><div class="opener"><span class="chap">Chapter VI.</span><h2>A Month Hence</h2><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div></div></section>
+<section class="pg text-pg r" data-i="68" ><div class="pg-in"><div class="rhead">A Month Hence</div><div class="prose drop solo"><p>Upon the twenty-first of December, the heavy silks had given way to softer colours, and solemn ceremony to cake and conversation. It is often said that the first glow of a marriage must fade with time. These pictures beg, most respectfully, to differ.</p></div><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg><div class="folio">68</div></div></section>
+<section class="pg verse-pg l" data-i="69" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Grow old along with me!</span><span class="line">The best is yet to be.</span></p><p class="attr"><span class="sc">Robert Browning</span><br><i>Rabbi Ben Ezra</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">69</div></div></section>
+<section class="pg plate-pg r" data-i="70" ><div class="pg-in"><figure class="mount port" data-n="26"><button class="zoom" type="button" aria-label="Enlarge: Safe, and at home"><img src="img/26.jpg" width="1067" height="1600" alt="Safe, and at home" decoding="async"></button><figcaption><span class="plno">Plate XXIV.</span><br>Safe, and at home</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="71" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">And the sunlight clasps the earth,</span><span class="line">And the moonbeams kiss the sea:</span><span class="line">What is all this sweet work worth</span><span class="line">If thou kiss not me?</span></p><p class="attr"><span class="sc">Percy Bysshe Shelley</span><br><i>Love’s Philosophy</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">71</div></div></section>
+<section class="pg plate-pg r" data-i="72" ><div class="pg-in"><figure class="mount land" data-n="27"><button class="zoom" type="button" aria-label="Enlarge: Tenderness, unhurried"><img src="img/27.jpg" width="1600" height="1067" alt="Tenderness, unhurried" decoding="async"></button><figcaption><span class="plno">Plate XXV.</span><br>Tenderness, unhurried</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="73" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Fill each other’s cup but drink not from one cup.</span><span class="line">Give one another of your bread</span><span class="line">but eat not from the same loaf.</span></p><p class="attr"><span class="sc">Kahlil Gibran</span><br><i>The Prophet</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">73</div></div></section>
+<section class="pg plate-pg r" data-i="74" ><div class="pg-in"><figure class="mount land" data-n="28"><button class="zoom" type="button" aria-label="Enlarge: Still the best of company"><img src="img/28.jpg" width="1600" height="1067" alt="Still the best of company" decoding="async"></button><figcaption><span class="plno">Plate XXVI.</span><br>Still the best of company</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="75" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Whatever our souls are made of,</span><span class="line">his and mine are the same.</span></p><p class="attr"><span class="sc">Emily Brontë</span><br><i>Wuthering Heights</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">75</div></div></section>
+<section class="pg plate-pg r" data-i="76" ><div class="pg-in"><figure class="mount land" data-n="29"><button class="zoom" type="button" aria-label="Enlarge: Sweetness, cut and shared"><img src="img/29.jpg" width="1600" height="1067" alt="Sweetness, cut and shared" decoding="async"></button><figcaption><span class="plno">Plate XXVII.</span><br>Sweetness, cut and shared</figcaption></figure></div></section>
+<section class="pg verse-pg l" data-i="77" ><div class="pg-in"><div class="rhead">Ramita</div><div class="vbox"><p class="lines"><span class="line">Thou hast brought the distant near</span><span class="line">and made a brother of the stranger.</span></p><p class="attr"><span class="sc">Rabindranath Tagore</span><br><i>Gitanjali</i></p><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg></div><div class="folio">77</div></div></section>
+<section class="pg plate-pg r" data-i="78" ><div class="pg-in"><figure class="mount land" data-n="30"><button class="zoom" type="button" aria-label="Enlarge: All of us: Ramendra (Jija ji), Maa, Papa, Amrita (Didi), and Uday"><img src="img/30.jpg" width="1600" height="1067" alt="All of us: Ramendra (Jija ji), Maa, Papa, Amrita (Didi), and Uday" decoding="async"></button><figcaption><span class="plno">Plate XXVIII.</span><br>All of us: Ramendra <span class="aka">(Jija ji)</span>, Maa, Papa, Amrita <span class="aka">(Didi)</span>, and Uday</figcaption></figure></div></section>
+<section class="pg opener-pg l" data-i="79" id="letters"><div class="pg-in"><div class="opener"><span class="chap">Letters</span><h2>From those who love them</h2><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg>
+<p class="epigraph"><q>If I loved you less, I might be able to talk about it more.</q><span class="attr"><span class="sc">Jane Austen</span>, <i>Emma</i></span></p></div></div></section>
+<section class="pg text-pg r" data-i="80" ><div class="pg-in"><div class="rhead">Letters</div><div class="letter">
+<p class="salute">My dear Amrita, my dear Ramendra,</p>
+<p>When we placed her hand in yours, Ramendra, we believed we were giving away the most precious thing we had. We were mistaken, and gladly so. We gave nothing away. We gained a son, and our daughter gained a home as full of love as the one she left.</p>
+<p>Two years on, our prayers for you have not changed; they have only grown longer. Be gentle with each other on the hard days, laugh together on the easy ones, and remember that you have a home here whose doors are always open.</p>
+<p class="ps">Visit us more often. The house is quieter than we should like.</p>
+<p class="from">With every blessing,<br><span class="sc">Maa and Papa</span></p>
+</div><div class="folio">80</div></div></section>
+<section class="pg text-pg l" data-i="81" ><div class="pg-in"><div class="rhead">Letters</div><div class="letter">
+<p class="salute">Dear Didi, dear Jija ji,</p>
+<p>Let the record show that this little volume was no small undertaking. One pendrive, two folders, and some thirteen hundred photographs, gone through with all the patience of a man reading a very long judgment. Twenty-nine were chosen, and a great many beautiful ones were left out.</p>
+<p>I set this down only so that the labour may be duly noted. It was considerable. The love behind it was greater still. You two have shown me what a marriage can be, and I could think of no better way to thank you than to tell your story as carefully as I knew how.</p>
+<p class="from">Your devoted younger brother,<br><span class="sc">Uday</span></p>
+</div><div class="folio">81</div></div></section>
+<section class="pg text-pg r" data-i="82" ><div class="pg-in"><div class="rhead">Letters</div><div class="letter">
+<p class="salute">Dear Amrita and Ramendra,</p>
+<p>Whatever the hour and whatever the trouble, a plan gone wrong, a long road, or simply a day that wants company, you have only to call, and we shall come. We are always there, and we always shall be.</p>
+<p>The same holds true for every happiness. We mean to be present at each anniversary that follows, to raise a glass to the two of you, and to remind you how very much you are loved.</p>
+<p class="from">Ever yours,<br><span class="sc">Tara</span> <span class="aka">(Nitin)</span> and <span class="sc">Sitara</span> <span class="aka">(Suchit)</span></p>
+</div><div class="folio">82</div></div></section>
+<section class="pg finis-pg l" data-i="83" ><div class="pg-in"><div class="finis"><svg class="fleuron" aria-hidden="true"><use href="#fl"/></svg><p class="word">Finis</p>
+<p class="colophon">Set in EB Garamond, and printed for the family of Amrita and Ramendra on the occasion of their second anniversary. <span id="days">Seven hundred and thirty days wed</span>, and every one of them chosen.</p></div></div></section>
+<section class="pg endpaper r" data-i="84" data-spread-only><div class="pg-in"></div></section>
+<section class="pg cover back-cover l" data-i="85" ><div class="pg-in"><div class="cover-in back"><svg class="fleuron gilt" aria-hidden="true"><use href="#fl"/></svg></div></div></section>
+    </div>
+  </div>
+  <div class="controls">
+    <button id="prev" type="button" aria-label="Previous page">&lsaquo; Back</button>
+    <span class="where" id="where" aria-live="polite">The cover</span>
+    <button id="next" type="button" aria-label="Next page">Turn &rsaquo;</button>
+  </div>
+  <p class="hint" id="hint">Tap the cover to open the book. Tap a photograph to see it larger.</p>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photograph">
+  <button class="x" id="lbx" type="button" aria-label="Close">&times;</button>
+  <figure><img id="lbimg" alt=""><figcaption id="lbcap"></figcaption></figure>
+</div>
+
+<script>
+(function () {
+  const CAPS = {"16": "A kiss upon the hand", "5": "Beneath a canopy of marigolds, she waited", "6": "Amrita (Didi), upon her wedding night", "7": "Ramendra (Jija ji), whose smile gave him away", "1": "The procession, in a shower of sparks", "8": "The arrival, seen from afar", "3": "Enthroned, for one evening and ever after", "9": "Side by side, as they would remain", "10": "The first of many hands held", "2": "The garlands exchanged, beneath falling colour", "11": "A hundred voices cheering", "12": "A look that said what no vow could", "13": "Under a sky of borrowed stars", "15": "Her joy, and his quiet pride", "17": "Laughter, the surest sign of a happy marriage", "18": "An embrace, and a home within it", "19": "Forehead to forehead, and the world grew small", "20": "Some moments need no colour", "21": "At the threshold of the sacred fire", "4": "Rice in hennaed palms, an offering for plenty", "22": "Hand over hand, the old words spoken", "23": "The sindoor", "24": "Husband and wife", "25": "The leave-taking", "26": "Safe, and at home", "27": "Tenderness, unhurried", "28": "Still the best of company", "29": "Sweetness, cut and shared", "30": "All of us: Ramendra (Jija ji), Maa, Papa, Amrita (Didi), and Uday"};
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const book = document.getElementById("book"), holder = document.getElementById("pages");
+  const PAGES = [...holder.querySelectorAll(".pg")];
+  const N = PAGES.length;
+  const where = document.getElementById("where"), prevB = document.getElementById("prev"), nextB = document.getElementById("next"), hint = document.getElementById("hint");
+  let mode = null, leaves = [], cur = 0, seq = [];
+  const DUR = reduce ? 0 : 1000;
+
+  /* days wed, in words */
+  (function () {
+    const start = Date.UTC(2024, 10, 17), now = new Date();
+    const d = Math.max(0, Math.round((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - start) / 86400000));
+    const ones = ["","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+    const tens = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+    function words(n) { const out = [];
+      if (n >= 1000) { out.push(words(Math.floor(n / 1000)) + " thousand"); n %= 1000; if (n && n < 100) out.push("and"); }
+      if (n >= 100) { out.push(ones[Math.floor(n / 100)] + " hundred"); n %= 100; if (n) out.push("and"); }
+      if (n >= 20) out.push(tens[Math.floor(n / 10)] + (n % 10 ? "-" + ones[n % 10] : "")); else if (n) out.push(ones[n]);
+      return out.join(" ") || "no"; }
+    const w = words(d), el = document.getElementById("days");
+    if (el) el.textContent = w.charAt(0).toUpperCase() + w.slice(1) + " days wed";
+  })();
+
+  function measure() {
+    const vw = document.documentElement.clientWidth - 32, vh = innerHeight - 120;
+    const spreadPw = Math.min(vw / 2, vh / 1.4);
+    const m = (vw >= 760 && spreadPw >= 300) ? "spread" : "single";
+    const pw = m === "spread" ? spreadPw : Math.min(vw, vh / 1.4, 520);
+    book.style.setProperty("--pw", Math.floor(pw) + "px");
+    book.style.setProperty("--ph", Math.floor(pw * 1.4) + "px");
+    return m;
+  }
+  function currentPage() {
+    if (mode === "spread") return Math.max(0, Math.min(N - 1, cur * 2 - (cur > 0 ? 1 : 0)));
+    if (mode === "single") return +seq[cur].dataset.i;
+    return 0;
+  }
+  function build(m, keepPage) {
+    mode = m;
+    leaves.forEach(l => l.remove()); leaves = [];
+    holder.classList.add("bound");
+    book.classList.toggle("single", m === "single");
+    if (m === "spread") {
+      for (let j = 0; j < N / 2; j++) {
+        const leaf = document.createElement("div"); leaf.className = "leaf";
+        const f = document.createElement("div"); f.className = "face front"; f.appendChild(PAGES[2 * j]);
+        const b = document.createElement("div"); b.className = "face back"; b.appendChild(PAGES[2 * j + 1]);
+        leaf.append(f, b); book.appendChild(leaf); leaves.push(leaf);
+      }
+      cur = keepPage % 2 === 0 ? keepPage / 2 : (keepPage + 1) / 2;
+    } else {
+      seq = PAGES.filter(p => !p.hasAttribute("data-spread-only"));
+      seq.forEach(p => { const leaf = document.createElement("div"); leaf.className = "leaf";
+        const f = document.createElement("div"); f.className = "face front"; f.appendChild(p);
+        const b = document.createElement("div"); b.className = "face back";
+        leaf.append(f, b); book.appendChild(leaf); leaves.push(leaf); });
+      PAGES.filter(p => p.hasAttribute("data-spread-only")).forEach(p => holder.appendChild(p));
+      cur = Math.max(0, seq.findIndex(p => +p.dataset.i >= keepPage));
+    }
+    apply(true);
+  }
+  function z() {
+    const L = leaves.length;
+    leaves.forEach((l, j) => { if (!l.classList.contains("moving")) l.style.zIndex = j < cur ? j + 1 : L - j + 1; });
+  }
+  function apply(instant) {
+    const L = leaves.length;
+    leaves.forEach((l, j) => {
+      const turned = j < cur;
+      if (instant) { l.style.transition = "none"; }
+      l.classList.toggle("turned", turned);
+      if (mode === "single") l.classList.toggle("gone", turned);
+      if (instant) { void l.offsetWidth; l.style.transition = ""; }
+    });
+    z(); status();
+  }
+  function status() {
+    const L = leaves.length;
+    const maxCur = mode === "spread" ? L : L - 1;
+    book.classList.toggle("closed-front", cur === 0);
+    book.classList.toggle("closed-back", mode === "spread" && cur === L);
+    prevB.disabled = cur === 0; nextB.disabled = cur >= maxCur;
+    let label;
+    if (cur === 0) label = "The cover";
+    else if (mode === "spread" && cur === L) label = "The back cover";
+    else if (mode === "spread") { const a = cur * 2 - 1, b = cur * 2; label = `Pages ${a} and ${b}`; }
+    else { const i = +seq[cur].dataset.i; label = i === N - 1 ? "The back cover" : `Page ${i}`; }
+    where.textContent = label;
+    hint.hidden = cur !== 0;
+  }
+  function turnTo(target) {
+    const L = leaves.length, maxCur = mode === "spread" ? L : L - 1;
+    target = Math.max(0, Math.min(maxCur, target));
+    if (target === cur) return;
+    const dir = target > cur ? 1 : -1;
+    const steps = [];
+    for (let s = cur; s !== target; s += dir) steps.push(dir > 0 ? s : s - 1);
+    const gap = steps.length > 1 ? Math.min(140, 900 / steps.length) : 0;
+    steps.forEach((j, k) => setTimeout(() => {
+      const l = leaves[j];
+      l.classList.add("moving"); l.style.zIndex = L + 20 + k;
+      if (mode === "single" && dir < 0) l.classList.remove("gone");
+      requestAnimationFrame(() => {
+        l.classList.toggle("turned", dir > 0);
+        setTimeout(() => { l.classList.remove("moving"); if (mode === "single" && dir > 0) l.classList.add("gone"); z(); }, DUR);
+      });
+    }, k * gap));
+    cur = target;
+    setTimeout(z, steps.length * gap + DUR + 30);
+    status();
+  }
+  const next = () => turnTo(cur + 1), prev = () => turnTo(cur - 1);
+  function goPage(i) {
+    if (mode === "spread") turnTo(i % 2 === 0 ? i / 2 : (i + 1) / 2);
+    else turnTo(Math.max(0, seq.findIndex(p => +p.dataset.i >= i)));
+  }
+
+  prevB.addEventListener("click", prev); nextB.addEventListener("click", next);
+  book.addEventListener("click", e => {
+    if (e.target.closest(".zoom, a, button")) return;
+    const r = book.getBoundingClientRect(), x = e.clientX - r.left;
+    if (mode === "spread") { (cur === 0 || x > r.width / 2) ? next() : prev(); }
+    else { x < r.width * .3 ? prev() : next(); }
+  });
+  addEventListener("keydown", e => {
+    if (!lb.hidden) { if (e.key === "Escape") closeLb(); return; }
+    if (e.key === "ArrowRight" || e.key === "PageDown") next();
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") prev();
+  });
+  let sx = null;
+  book.addEventListener("touchstart", e => { sx = e.touches[0].clientX; }, { passive: true });
+  book.addEventListener("touchend", e => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 45) (dx < 0 ? next : prev)(); sx = null; });
+  document.querySelectorAll("[data-goto]").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault(); const t = document.getElementById(a.dataset.goto); if (t) goPage(+t.dataset.i);
+  }));
+
+  /* photographs enlarge */
+  const lb = document.getElementById("lb"), lbimg = document.getElementById("lbimg"), lbcap = document.getElementById("lbcap");
+  let last = null;
+  function closeLb() { lb.hidden = true; lbimg.removeAttribute("src"); if (last) last.focus(); }
+  document.querySelectorAll(".mount .zoom").forEach(b => b.addEventListener("click", e => {
+    e.stopPropagation(); last = b; const m = b.closest(".mount"); const n = +m.dataset.n;
+    const label = m.querySelector(".plno").textContent;
+    lbimg.src = "img/" + String(n).padStart(2, "0") + ".jpg"; lbimg.alt = CAPS[n]; lbcap.textContent = label + " " + CAPS[n];
+    lb.hidden = false; document.getElementById("lbx").focus();
+  }));
+  document.getElementById("lbx").addEventListener("click", closeLb);
+  lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
+
+  build(measure(), 0);
+  let rt;
+  addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => {
+    const keep = currentPage(); const m = measure(); if (m !== mode) build(m, keep); }, 150); });
+})();
+</script>
+
+</body>
+</html>
